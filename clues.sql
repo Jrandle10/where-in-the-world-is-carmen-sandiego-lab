@@ -5,6 +5,12 @@
  
 -- TODO: Write SQL query here
 
+SELECT name FROM country WHERE population = 
+  (SELECT MIN(population) 
+  FROM country WHERE region = 'Southern Europe');
+
+-- the least populated city in Southern Europe is VAT Holy See (Vatican City State)
+
 
 -- Clue #2: Now that we're here, we have insight that Carmen was seen attending 
 -- language classes in this country's officially recognized language. Check our 
@@ -13,10 +19,24 @@
 
 -- TODO: Write SQL query here
 
+SELECT * FROM countrylanguage WHERE countrycode = 'VAT';
+Italian
+
+-- Italian is the spoken language
+
+
+
+
 
 -- Clue #3: We have new news on the classes Carmen attended – our gumshoes tell us she's moved on to a different country, a country where people speak only the language she was learning. Find out which nearby country speaks nothing but that language.
 
 -- TODO: Write SQL query here
+
+SELECT * FROM countrylanguage WHERE language  = 'Italian';
+
+-- The country with the countrycode 'SMR' strictly speaks Italian
+
+
 
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a 
@@ -27,6 +47,10 @@
 
 -- TODO: Write SQL query here
 
+SELECT * FROM city WHERE countrycode  = 'SMR'
+
+-- She is probably flying out of Serravalle
+
 
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar 
 -- names, but in totally different parts of the globe! She's headed to South 
@@ -36,6 +60,15 @@
 
 -- TODO: Write SQL query here
 
+SELECT * FROM city WHERE name LIKE 'Serra%';
+
+-- She may be in Serra
+
+SELECT * FROM country WHERE code  = 'BRA';
+
+-- She is in Serra, Brazil
+
+
 
 -- Clue #6: We're close! Our South American agent says she just got a taxi at
 -- the airport, and is headed towardsthe capital! Look up the country's 
@@ -43,6 +76,10 @@
 -- we'll follow right behind you!
 
 -- TODO: Write SQL query here
+
+SELECT * FROM city WHERE id = '211';
+
+-- Carmen is headed towards Brasilia
 
 
 -- Clue #7: She knows we're on to her – her taxi dropped her off at the 
@@ -66,3 +103,7 @@
 
 -- TODO: Write SQL query here
 
+SELECT * FROM city WHERE population  = '91084';
+
+
+-- We caught her in Santa Monica, California
